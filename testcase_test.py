@@ -1,4 +1,5 @@
 from app.test_case import TestCase
+from app.test_result import TestResult
 from app.was_run import WasRun
 
 
@@ -16,6 +17,12 @@ class TestCaseTest(TestCase):
     def testFailedResult(self):
         test = WasRun("testBrokenMethod")
         result = test.run()
+        assert "1 run, 1 failed" == result.summary()
+
+    def testFailedResultFormatting(self):
+        result = TestResult()
+        result.testStarted()
+        result.testFailed()
         assert "1 run, 1 failed" == result.summary()
 
 
